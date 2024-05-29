@@ -1,0 +1,3 @@
+interface jellyBean{
+    beanId:number
+}
