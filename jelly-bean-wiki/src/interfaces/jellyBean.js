@@ -1,3 +1,0 @@
-interface jellyBean{
-    beanId:number
-}
