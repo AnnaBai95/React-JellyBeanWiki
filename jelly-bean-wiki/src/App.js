@@ -4,13 +4,18 @@ import jellyWikiResponse from "./interfaces/jellyBean.ts";
 import NavBar from "./components/navigation/navBar.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
+import Pagination from "./components/navigation/Pagination.js";
 
 function App() {
   const [jellyResponse, setJellyResponse] = useState({});
   const [jellyList, setJellyList] = useState([]);
+  const [pageIndex, setPageIndex] = useState(1);
+  const [pageSize, setPageSize] = useState(12);
 
   useEffect(() => {
-    fetch("https://jellybellywikiapi.onrender.com/api/beans")
+    fetch(
+      `https://jellybellywikiapi.onrender.com/api/beans?pageIndex=${pageIndex}&pageSize=${pageSize}`
+    )
       .then((response) => {
         return response.json();
       })
@@ -21,22 +26,32 @@ function App() {
       .catch((error) => {
         console.log("Error", error);
       });
-  }, []);
+  }, [pageIndex, pageSize]);
 
   // useEffect(() => {
   //   console.log("Get res", jellyResponse);
   // }, [jellyResponse]);
 
-  useEffect(() => {
-    console.log("List", jellyList);
-  }, [jellyList]);
+  // useEffect(() => {
+  //   console.log("List", jellyList);
+  // }, [jellyList]);
 
-  // dbdbdb
+  const handlePageChange = (pageNumber) => {
+    setPageIndex(pageNumber);
+  };
+
   return (
     <div className="mb-16">
       <NavBar></NavBar>
       <main className="2xl:container mx-auto px-6 mt-16">
-        <div className="grid grid-cols-1 xs:grid-col-2  sm:grid-col-2 md:grid-col-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <Pagination
+          currentPage={jellyResponse.currentPage}
+          pageSize={jellyResponse.pageSize}
+          totalCount={jellyResponse.totalCount}
+          totalPages={jellyResponse.totalPages}
+          onPageChange={handlePageChange}
+        ></Pagination>
+        <div className="grid grid-cols-1 xs:grid-col-2  sm:grid-col-2 md:grid-col-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10 mt-6">
           {jellyList.map((jellyBean, index) => (
             <a href="#" key={index}>
               <div className="card rounded-md shadow-lg bg-white relative">
@@ -116,6 +131,13 @@ function App() {
             </a>
           ))}
         </div>
+        <Pagination
+          currentPage={jellyResponse.currentPage}
+          pageSize={jellyResponse.pageSize}
+          totalCount={jellyResponse.totalCount}
+          totalPages={jellyResponse.totalPages}
+          onPageChange={handlePageChange}
+        ></Pagination>
       </main>
     </div>
   );
