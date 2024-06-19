@@ -1,0 +1,13 @@
+.input-group {
+    @apply rounded-lg;
+    @apply p-3;
+    display: flex;
+    background-color: #EAECEE;
+    input {
+        border: none;
+        background-color: transparent;
+        width: 100%;
+        height: 100%;
+        outline: none;
+    }
+}

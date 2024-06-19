@@ -18,7 +18,7 @@ function Pagination({
       {pageNumbers.map((pageNumber, index) => (
         <div className="pagination" key={index}>
           <button
-            className={`border-solid border-gray-800 border-2 rounded-sm py-1 px-2 ${
+            className={`rounded-sm py-1 px-3 ${
               currentPage === pageNumber ? "pagination-active" : ""
             }`}
             onClick={() => onPageChange(pageNumber)}
