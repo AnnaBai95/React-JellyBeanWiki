@@ -9,5 +9,10 @@
         width: 100%;
         height: 100%;
         outline: none;
+        @apply text-gray-800;
+    }
+
+    .search-icon{
+       @apply text-gray-500;
     }
 }
