@@ -1,12 +1,12 @@
 import "./App.scss";
 import { useState, useEffect } from "react";
-import jellyWikiResponse from "./interfaces/jellyBean.ts";
 import NavBar from "./components/navigation/NavBar.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "./components/navigation/Pagination.js";
 import SearchBar from "./components/others/SearchBar.js";
+import Filter from "./components/others/Filter.js";
 
 function App() {
   const [jellyResponse, setJellyResponse] = useState({});
@@ -68,7 +68,10 @@ function App() {
     <div className="mb-16">
       <NavBar></NavBar>
       <main className="2xl:container mx-auto px-6 mt-16">
-        <SearchBar onFlavorSearch={handleFlavorSearch}></SearchBar>
+        <div className="flex justify-between">
+          <SearchBar onFlavorSearch={handleFlavorSearch}></SearchBar>
+          <Filter></Filter>
+        </div>
 
         <div className="grid grid-cols-1 xs:grid-col-2  sm:grid-col-2 md:grid-col-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10 mt-6">
           {loading && (
@@ -94,82 +97,85 @@ function App() {
             </div>
           )}
           {jellyList.map((jellyBean, index) => (
-            <a href="#" key={index}>
-              <div className="card rounded-md shadow-lg bg-white relative">
-                <div className="card-header rounded-t-md rounded-r-md">
-                  <img
-                    src={jellyBean.imageUrl}
-                    alt={`${jellyBean.flavorName} jellybean`}
-                    className="max-w-48 min-w-48"
-                  ></img>
-                </div>
-                <div className="card-body p-4">
-                  <p className="text-lg font-semibold mb-3">
-                    {jellyBean.flavorName}
-                  </p>
-                  <p className="text-sm font-medium text-gray-800">
-                    {jellyBean.description}
-                  </p>
-                  <div className="mt-10">
-                    <span className="text-gray-800 text-sm font-semibold me-2">
-                      {jellyBean.kosher && (
-                        <>
-                          <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            className="me-1"
-                          />
-                          Kosher
-                        </>
-                      )}
-                    </span>
-                    <span className="text-gray-800 text-sm font-semibold me-2">
-                      {jellyBean.glutenFree && (
-                        <>
-                          <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            className="me-1"
-                          />
-                          Gluten free
-                        </>
-                      )}
-                    </span>
-                    <span className="text-gray-800 text-sm font-semibold me-2">
-                      {jellyBean.sugarFree && (
-                        <>
-                          <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            className="me-1"
-                          />
-                          Sugar free
-                        </>
-                      )}
-                    </span>
-                    <span className="text-gray-800 text-sm font-semibold me-2">
-                      {jellyBean.seasonal && (
-                        <>
-                          <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            className="me-1"
-                          />
-                          Seasonal
-                        </>
-                      )}
-                    </span>
-                  </div>
-                </div>
-                <div className="card-back rounded-md p-4">
-                  <p className="text-medium font-semibold">Ingredients</p>
-                  <div>
-                    {jellyBean.ingredients.map((ingredient, index) => (
-                      <p className="text-gray-800 text-xs" key={index}>
-                        {" "}
-                        {ingredient}
-                      </p>
-                    ))}
-                  </div>
+            <div
+              className="card rounded-md shadow-lg bg-white relative"
+              key={index}
+            >
+              <div className="card-header rounded-t-md rounded-r-md">
+                <img
+                  src={jellyBean.imageUrl}
+                  alt={`${jellyBean.flavorName} jellybean`}
+                  className="max-w-48 min-w-48"
+                ></img>
+              </div>
+              <div className="card-body p-4">
+                <p className="text-lg font-semibold mb-3 text-jelly-red">
+                  {jellyBean.flavorName}
+                </p>
+                <p className="text-sm font-medium text-gray-800">
+                  {jellyBean.description}
+                </p>
+                <div className="mt-10">
+                  <span className="text-gray-800 text-sm font-semibold me-2">
+                    {jellyBean.kosher && (
+                      <>
+                        <FontAwesomeIcon
+                          icon={faCheckCircle}
+                          className="me-1 text-jelly-light-red"
+                        />
+                        Kosher
+                      </>
+                    )}
+                  </span>
+                  <span className="text-gray-800 text-sm font-semibold me-2">
+                    {jellyBean.glutenFree && (
+                      <>
+                        <FontAwesomeIcon
+                          icon={faCheckCircle}
+                          className="me-1 text-jelly-light-red"
+                        />
+                        Gluten free
+                      </>
+                    )}
+                  </span>
+                  <span className="text-gray-800 text-sm font-semibold me-2">
+                    {jellyBean.sugarFree && (
+                      <>
+                        <FontAwesomeIcon
+                          icon={faCheckCircle}
+                          className="me-1 text-jelly-light-red"
+                        />
+                        Sugar free
+                      </>
+                    )}
+                  </span>
+                  <span className="text-gray-800 text-sm font-semibold me-2">
+                    {jellyBean.seasonal && (
+                      <>
+                        <FontAwesomeIcon
+                          icon={faCheckCircle}
+                          className="me-1 text-jelly-light-red"
+                        />
+                        Seasonal
+                      </>
+                    )}
+                  </span>
                 </div>
               </div>
-            </a>
+              <div className="card-back rounded-md p-4">
+                <p className="text-medium font-semibold text-jelly-red mb-3">
+                  Ingredients
+                </p>
+                <div>
+                  {jellyBean.ingredients.map((ingredient, index) => (
+                    <p className="text-gray-800 text-sm mb-2" key={index}>
+                      {" "}
+                      {ingredient}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
         <Pagination
@@ -186,7 +192,9 @@ function App() {
               icon={faBan}
               className="text-5xl"
             ></FontAwesomeIcon>
-            <p className="text-4xl mb-6">There are no jelly beans to be displayed</p>
+            <p className="text-4xl mb-6">
+              There are no jelly beans to be displayed
+            </p>
             <p className="text-2xl">
               Please ensure that you type the full name of the jelly bean you
               wish to find. Example "Barbados Cherry". Partial searches example

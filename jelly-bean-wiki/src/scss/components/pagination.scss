@@ -1,6 +1,9 @@
 .pagination{
     .pagination-active{
-    @apply bg-gray-800;
-    @apply text-white;
+    // @apply bg-gray-800;
+    // @apply text-white;
+    @apply bg-jelly-light-red;
+    @apply text-black;
+    @apply font-bold;
     }
 }
