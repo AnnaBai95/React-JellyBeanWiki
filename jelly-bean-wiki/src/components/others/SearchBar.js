@@ -5,7 +5,7 @@ import "../../scss/components/form_controls.scss";
 function SearchBar({ onFlavorSearch }) {
   return (
     <div className="flex flex-col w-2/4 me-4">
-      <label for="flavorSearch">Search for jellybean flavors</label>
+      <label htmlFor="flavorSearch">Search for jellybean flavors</label>
       <div className="input-group w-full">
         <input
           onChange={(e) => onFlavorSearch(e.target.value)}

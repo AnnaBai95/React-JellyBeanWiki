@@ -1,8 +1,8 @@
-function Filter() {
+function Filter({onDietFilter}) {
   return (
     <div className="flex flex-col w-2/4">
-      <label className="dietaryFilter">Filter</label>
-      <select className="dietaryFilter">
+      <label htmlFor="dietFilter" className="dietaryFilter">Filter</label>
+      <select id="dietFilter" className="dietaryFilter" onChange={(e)=> onDietFilter(e.target.value)}>
         <option value="Kosher">All</option>
         <option value="Kosher">Kosher</option>
         <option value="Kosher">Gluten Free</option>
