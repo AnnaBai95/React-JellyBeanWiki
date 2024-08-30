@@ -1,13 +1,13 @@
 function Filter({onDietFilter}) {
   return (
     <div className="flex flex-col w-2/4">
-      <label htmlFor="dietFilter" className="dietaryFilter">Filter</label>
+      <label htmlFor="dietFilter" className="dietaryFilter font-semibold">Filter dietary restrictions</label>
       <select id="dietFilter" className="dietaryFilter" onChange={(e)=> onDietFilter(e.target.value)}>
-        <option value="Kosher">All</option>
-        <option value="Kosher">Kosher</option>
-        <option value="Kosher">Gluten Free</option>
-        <option value="Kosher">Sugar Free</option>
-        <option value="Kosher">Seasonal</option>
+        <option value="all">All</option>
+        <option value="kosher">Kosher</option>
+        <option value="glutenFree">Gluten Free</option>
+        <option value="sugarFree">Sugar Free</option>
+        <option value="seasonal">Seasonal</option>
       </select>
     </div>
   );

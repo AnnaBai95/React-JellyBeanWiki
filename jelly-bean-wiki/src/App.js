@@ -16,7 +16,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
-  const [dietaryRestriction, setDietaryRestriction] = useState("");
 
   useEffect(() => {
     fetch(
@@ -66,31 +65,21 @@ function App() {
   }, [hasSearched, jellyList]);
 
   const handleFilter = (restriction) => {
-
-    console.log("Rest", restriction);
-    if (restriction === "Kosher") {
-      setDietaryRestriction("kosher");
-    } else if (restriction === "Gluten Free") {
-      setDietaryRestriction("glutenFree");
-    } else if (restriction === "Sugar Free") {
-      setDietaryRestriction("sugarFree");
-    } else if (restriction === "Seasonal") {
-      setDietaryRestriction("seasonal");
+    if (restriction !== "all") {
+      fetch(
+        `https://jellybellywikiapi.onrender.com/api/beans?${restriction}=true`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setJellyResponse(data);
+          setJellyList(data.items);
+        })
+        .catch((error) => {
+          console.log("Error filtering");
+        });
     }
-
-    fetch(
-      `https://jellybellywikiapi.onrender.com/api/beans?${dietaryRestriction}=true`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setJellyResponse(data);
-        setJellyList(data.items);
-      })
-      .catch((error) => {
-        console.log("Error filtering");
-      });
   };
 
   return (

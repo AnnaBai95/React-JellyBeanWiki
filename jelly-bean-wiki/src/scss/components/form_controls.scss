@@ -2,7 +2,7 @@
     @apply rounded-lg;
     @apply p-3;
     display: flex;
-    background-color: #EAECEE;
+    border: 1px solid #604c4ca6;
     input {
         border: none;
         background-color: transparent;
@@ -12,13 +12,22 @@
         @apply text-gray-800;
     }
 
-    .search-icon{
-       @apply text-jelly-light-red;
+    &:has(input:focus) {
+        @apply border-jelly-light-red;
+        @apply border-2;
+    }
+    .search-icon {
+        @apply text-jelly-red;
     }
 }
 
-select{
+select {
     @apply rounded-lg;
     @apply p-3;
-    background-color: #EAECEE;
+    border: 1px solid #604c4ca6;
+
+    &:focus, &:active, &:focus-visible {
+        @apply border-jelly-light-red;
+        @apply border-2;
+    }
 }
