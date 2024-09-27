@@ -16,19 +16,25 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [hasFiltered, setHasFiltered] = useState(false);
+  const [hasFilteredResults, setHasFilteredResults] = useState(false);
+  const [unFilteredJellyResponse, setunFilteredJellyResponse] =useState([]);
+  const [unFilteredJellyList, setunFilteredJellyList] =useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       `https://jellybellywikiapi.onrender.com/api/beans?pageIndex=${pageIndex}&pageSize=${pageSize}`
     )
       .then((response) => {
-        setLoading(true);
         return response.json();
       })
       .then((data) => {
         setLoading(false);
         setJellyResponse(data);
         setJellyList(data.items);
+        setunFilteredJellyResponse(data);
+        setunFilteredJellyList(data.items);
       })
       .catch((error) => {
         console.log("Error", error);
@@ -65,6 +71,7 @@ function App() {
   }, [hasSearched, jellyList]);
 
   const handleFilter = (restriction) => {
+    
     if (restriction !== "all") {
       fetch(
         `https://jellybellywikiapi.onrender.com/api/beans?${restriction}=true`
@@ -73,14 +80,29 @@ function App() {
           return response.json();
         })
         .then((data) => {
+          setHasFiltered(true);
           setJellyResponse(data);
           setJellyList(data.items);
+
         })
         .catch((error) => {
           console.log("Error filtering");
         });
     }
+    else{
+      setJellyResponse(unFilteredJellyResponse);
+      setJellyList(unFilteredJellyList);
+
+    }
   };
+
+  useEffect(() => {
+
+    if(jellyList.length > 0 )
+    {
+        setHasFilteredResults(true);
+    }
+  });
 
   return (
     <div className="mb-16">
@@ -92,8 +114,9 @@ function App() {
         </div>
 
         <div className="grid grid-cols-1 xs:grid-col-2  sm:grid-col-2 md:grid-col-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10 mt-6">
-          {loading && (
-            <div className="card rounded-md shadow-lg bg-white relative animate-pulse">
+          { loading && (
+            Array.from({ length: 12 },( _,c) => (
+            <div key={c} className="card rounded-md shadow-lg bg-white relative animate-pulse">
               <div className="card-header rounded-t-md rounded-r-md">
                 <svg
                   className="w-10 h-10 text-gray-200 dark:text-gray-600"
@@ -113,6 +136,7 @@ function App() {
                 </div>
               </div>
             </div>
+            ))
           )}
           {jellyList.map((jellyBean, index) => (
             <div
@@ -204,7 +228,7 @@ function App() {
           onPageChange={handlePageChange}
         ></Pagination>
 
-        {showMessage && (
+        {(showMessage || (hasFiltered && !hasFilteredResults)) && (
           <div className="text-center">
             <FontAwesomeIcon
               icon={faBan}
@@ -213,11 +237,13 @@ function App() {
             <p className="text-4xl mb-6">
               There are no jelly beans to be displayed
             </p>
-            <p className="text-2xl">
-              Please ensure that you type the full name of the jelly bean you
-              wish to find. Example "Barbados Cherry". Partial searches example
-              "Bar", "Barbados" will not return a result.
-            </p>
+            {showMessage && (
+              <p className="text-2xl">
+                Please ensure that you type the full name of the jelly bean you
+                wish to find. Example "Barbados Cherry". Partial searches
+                example "Bar", "Barbados" will not return a result.
+              </p>
+            )}
           </div>
         )}
       </main>
