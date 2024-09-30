@@ -1,0 +1,13 @@
+.alert-container {
+    padding: 10px;
+    &.error-alert {
+        @apply text-jelly-red;
+        @apply border-jelly-light-red;
+        @apply border-solid;
+        @apply border-2;
+        @apply rounded-lg;
+        @apply bg-red-100;
+        @apply my-4;
+        @apply font-semibold;
+    }
+}

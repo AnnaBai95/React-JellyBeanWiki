@@ -1,0 +1,32 @@
+.card {
+  height: 100%;
+
+  .card-header {
+    background: #604c4ca6;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &:hover{
+    .card-back{
+      height: 100%;
+      visibility: visible;
+    }
+  }
+
+  .card-back {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #EAECEE;
+    overflow-y: auto;
+    width: 100%;
+    height: 0px;
+    transition: .5s ease;
+    visibility: hidden;
+  }
+}
+
