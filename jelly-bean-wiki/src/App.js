@@ -71,6 +71,7 @@ function App() {
   }, [hasSearched, jellyList]);
 
   const handleFilter = (restriction) => {
+    setHasSearched(false);
     
     if (restriction !== "all") {
       fetch(
@@ -97,10 +98,12 @@ function App() {
   };
 
   useEffect(() => {
-
     if(jellyList.length > 0 )
     {
         setHasFilteredResults(true);
+    }
+    else{
+      setHasFilteredResults(false);
     }
   });
 
@@ -237,7 +240,7 @@ function App() {
             <p className="text-4xl mb-6">
               There are no jelly beans to be displayed
             </p>
-            {showMessage && (
+            {(showMessage && hasSearched) && (
               <p className="text-2xl">
                 Please ensure that you type the full name of the jelly bean you
                 wish to find. Example "Barbados Cherry". Partial searches
