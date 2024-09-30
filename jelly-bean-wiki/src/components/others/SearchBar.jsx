@@ -4,7 +4,7 @@ import "../../scss/components/form_controls.scss";
 
 function SearchBar({ onFlavorSearch }) {
   return (
-    <div className="flex flex-col w-2/4 me-4">
+    <div className="flex flex-col w-full lg:w-2/4 me-4">
       <label htmlFor="flavorSearch" className="font-semibold">Search for jellybean flavors using the exact flavor name</label>
       <div className="input-group w-full">
       <FontAwesomeIcon
