@@ -125,6 +125,7 @@ function App() {
         {errorMessage && <Error message={errorMessage}></Error>}
 
         <div className="grid grid-cols-1 xs:grid-col-2  sm:grid-col-2 md:grid-col-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10 mt-6">
+        {/* Display 12 skeleton card until the data loads */}
           {loading &&
             Array.from({ length: 12 }, (_, c) => (
               <div
