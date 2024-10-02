@@ -117,13 +117,14 @@ function App() {
     <div className="mb-16">
       <NavBar></NavBar>
       <main className="2xl:container mx-auto px-6 mt-16">
-        <div className="flex flex-col lg:flex-row justify-between gap-4">
+        <div className="flex justify-between">
           <SearchBar onFlavorSearch={handleFlavorSearch}></SearchBar>
           <Filter onDietFilter={handleFilter}></Filter>
         </div>
 
         {errorMessage && <Error message={errorMessage}></Error>}
 
+        {/* <Error message={errorMessage}></Error> */}
         <div className="grid grid-cols-1 xs:grid-col-2  sm:grid-col-2 md:grid-col-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10 mt-6">
         {/* Display 12 skeleton card until the data loads */}
           {loading &&
