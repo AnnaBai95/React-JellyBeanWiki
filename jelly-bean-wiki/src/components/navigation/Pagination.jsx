@@ -14,11 +14,11 @@ function Pagination({
   }
 
   return (
-    <div className="flex justify-end gap-4">
+    <div className="flex justify-end gap-1 md:gap-4">
       {pageNumbers.map((pageNumber, index) => (
         <div className="pagination" key={index}>
           <button
-            className={`rounded-sm py-1 px-3 ${
+            className={`rounded-sm py-1 px-1 md:px-3 ${
               currentPage === pageNumber ? "pagination-active" : ""
             }`}
             onClick={() => onPageChange(pageNumber)}
@@ -28,6 +28,7 @@ function Pagination({
         </div>
       ))}
     </div>
+
   );
 }
 

@@ -1,6 +1,6 @@
 function Filter({onDietFilter}) {
   return (
-    <div className="flex flex-col w-2/4">
+    <div className="flex flex-col w:full lg:w-2/4">
       <label htmlFor="dietFilter" className="dietaryFilter font-semibold">Filter dietary restrictions</label>
       <select id="dietFilter" className="dietaryFilter" onChange={(e)=> onDietFilter(e.target.value)}>
         <option value="all">All</option>
