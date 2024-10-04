@@ -1,5 +1,6 @@
 
 import LogoNoBg from "../../images/logo-no-background.png";
+
 function NavBar() {
   return (
     <header className="border-b-2 shadow-custom bg-white">

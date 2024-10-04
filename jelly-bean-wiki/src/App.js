@@ -111,7 +111,7 @@ function App() {
     } else {
       setHasFilteredResults(false);
     }
-  });
+  }, [jellyList]);
 
   return (
     <div className="mb-16">
