@@ -22,6 +22,7 @@ function App() {
   const [unFilteredJellyResponse, setunFilteredJellyResponse] = useState([]);
   const [unFilteredJellyList, setunFilteredJellyList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [flavorSearched, setFlavorSearched] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -51,6 +52,7 @@ function App() {
   };
 
   const handleFlavorSearch = (flavor) => {
+    setFlavorSearched(flavor);
     fetch(
       `https://jellybellywikiapi.onrender.com/api/beans?flavorName=${flavor}`
     )
@@ -113,12 +115,23 @@ function App() {
     }
   }, [jellyList]);
 
+  const handleClearSearchBox = () => {
+    setJellyResponse(unFilteredJellyResponse);
+    setJellyList(unFilteredJellyList);
+    setFlavorSearched("");
+  };
+
   return (
     <div className="mb-16">
       <NavBar></NavBar>
       <main className="2xl:container mx-auto px-6 mt-16">
         <div className="flex flex-col lg:flex-row justify-between gap-4">
-          <SearchBar onFlavorSearch={handleFlavorSearch}></SearchBar>
+          <SearchBar
+            onFlavorSearch={handleFlavorSearch}
+            hasSearched={hasSearched}
+            onClearSearchValue={handleClearSearchBox}
+            flavorSearched={flavorSearched}
+          ></SearchBar>
           <Filter onDietFilter={handleFilter}></Filter>
         </div>
 
