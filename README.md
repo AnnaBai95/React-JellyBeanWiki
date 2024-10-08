@@ -10,10 +10,13 @@ This is a jellybean wiki built using the [Jelly Belly Wiki](https://jelly-belly-
 
   ## Overview
 
-  The jelly-bean wiki was build uing React, Tailwind and SCSS. You can navigate through pages of jellybeans and perform search and filter operations.
+  The jelly-bean wiki was build uing React, Tailwind and SCSS. You can navigate through pages of jellybeans and perform search and filter 
+  operations.
 
   ### Recording
-  https://github.com/user-attachments/assets/02ce67c1-7043-4488-93c2-8ec827371e93
+
+  https://github.com/user-attachments/assets/d3afb43e-9334-4b89-bf28-fd9219e91652
+
 
 
 ## Author
